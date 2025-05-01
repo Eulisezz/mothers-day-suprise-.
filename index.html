@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Mother's Day, Nanay!</title>
+  <style>
+    body {
+      background: #ffeef0;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 50px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      color: #d6336c;
+    }
+
+    .envelope-container {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      margin: 50px auto;
+      perspective: 1000px;
+    }
+
+    .envelope {
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+
+    .envelope:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 150px 100px 150px;
+      border-color: transparent transparent #d6336c transparent;
+      z-index: 2;
+    }
+
+    .message-card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      background: white;
+      box-sizing: border-box;
+      transform: rotateX(-90deg);
+      backface-visibility: hidden;
+      transition: transform 1s;
+      overflow: auto;
+      z-index: 1;
+    }
+
+    .opened .envelope {
+      transform: rotateX(180deg);
+    }
+
+    .opened .message-card {
+      transform: rotateX(0deg);
+    }
+
+    /* Falling Hearts Animation */
+    .heart {
+      position: absolute;
+      top: -50px;
+      width: 30px;
+      height: 30px;
+      background: red;
+      transform: rotate(45deg);
+      animation: fall 8s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -15px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -15px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Happy Mother's Day, Nanay!</h1>
+  <p>Click the envelope to reveal your surprise!</p>
+
+  <div class="envelope-container" onclick="openEnvelope()">
+    <div class="envelope"></div>
+    <div class="message-card" id="messageCard">
+      <h2>Mahal kong Nanay,</h2>
+      <p>Maraming salamat Nanay sa walang sawang pag-aaruga, pag-unawa, at pagmamahal na ibinibigay n'yo sa akin araw-araw. Kayo ang ilaw ng ating tahanan at ang puso ng ating pamilya. Hindi ko man madalas nasasabi, pero sobrang nagpapasalamat ako sa lahat ng sakripisyo n’yo para sa amin.</p>
+      <p>Sa bawat yakap, payo, at ngiti mo—ramdam ko ang tunay na pagmamahal. Hindi ko kayo ipagpapalit kahit kanino. Mahal na mahal kita, Ma. Happy Mother’s Day!</p>
+      <p style="margin-top: 20px; font-style: italic;">— Eulises</p>
+    </div>
+  </div>
+
+  <!-- Hearts Generator Script -->
+  <script>
+    function openEnvelope() {
+      document.querySelector('.envelope-container').classList.toggle('opened');
+    }
+
+    // Generate hearts
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }, 300);
+  </script>
+
+</body>
+</html>
